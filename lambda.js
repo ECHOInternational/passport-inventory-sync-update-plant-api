@@ -6,17 +6,30 @@ const sqs = new AWS.SQS();
 
 const incoming_queue_url = process.env.TASK_QUEUE_URL;
 
-const headers = {
-  'Accept': 'application/vnd.api+json'
+var options = {
+	url: process.env.API_BASE_URL + "plant-stock-items/touch/",
+	json: true,
+	auth: {
+		'user': process.env.USERNAME,
+		'pass': process.env.PASSWORD,
+		'sendImmediately': true
+	},
+	data: null
 };
 
 exports.handler = function(event, context, callback) {
 	records = event.Records;
-	data = records[0].body;
 
-	console.log(data);
+	options.data = records[0].body;
+	console.log(options.data);
 
-	finish(records[0].receiptHandle, callback);
+	request.post(options).then(
+		function(response){
+			console.log(response.statusCode);
+			finish(records[0].receiptHandle, callback);
+		},
+		callback
+	);
 };
 
 function finish(receipt_handle, callback){

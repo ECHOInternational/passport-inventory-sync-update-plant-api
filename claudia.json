@@ -1,0 +1,7 @@
+{
+  "lambda": {
+    "role": "passport-inventory-sync-update-plant-api-executor",
+    "name": "passport-inventory-sync-update-plant-api",
+    "region": "us-east-1"
+  }
+}

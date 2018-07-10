@@ -20,12 +20,12 @@ var options = {
 exports.handler = function(event, context, callback) {
 	records = event.Records;
 
-	options.data = records[0].body;
+	options.data = JSON.parse(records[0].body);
 	console.log(options.data);
 
 	request.post(options).then(
 		function(response){
-			console.log(response.statusCode);
+			console.log(response);
 			finish(records[0].receiptHandle, callback);
 		},
 		callback

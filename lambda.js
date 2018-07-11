@@ -14,14 +14,14 @@ var options = {
 		'pass': process.env.PASSWORD,
 		'sendImmediately': true
 	},
-	data: null
+	body: null
 };
 
 exports.handler = function(event, context, callback) {
 	records = event.Records;
 
-	options.data = JSON.parse(records[0].body);
-	console.log(options.data);
+	options.body = JSON.parse(records[0].body);
+	console.log(options.body);
 
 	request.post(options).then(
 		function(response){

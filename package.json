@@ -26,6 +26,7 @@
   "dependencies": {
     "aws-sdk": "^2.270.1",
     "request": "^2.87.0",
+    "request-debug": "^0.2.0",
     "request-promise-native": "^1.0.5"
   }
 }

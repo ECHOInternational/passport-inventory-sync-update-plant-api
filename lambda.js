@@ -1,6 +1,6 @@
 var AWS = require("aws-sdk");
 AWS.config.update({region: 'us-east-1'});
-const request = require("request-promise-native");
+var request = require("request-promise-native");
 
 const sqs = new AWS.SQS();
 
@@ -8,20 +8,19 @@ const incoming_queue_url = process.env.TASK_QUEUE_URL;
 
 var options = {
 	url: process.env.API_BASE_URL + "plant-stock-items/touch/",
-	json: true,
 	auth: {
 		'user': process.env.USERNAME,
 		'pass': process.env.PASSWORD,
 		'sendImmediately': true
 	},
-	body: null
 };
 
 exports.handler = function(event, context, callback) {
+	console.log(event);
 	records = event.Records;
 
-	options.body = JSON.parse(records[0].body);
-	console.log(options.body);
+	options.json= JSON.parse(records[0].body);
+	console.log(options.json);
 
 	request.post(options).then(
 		function(response){
